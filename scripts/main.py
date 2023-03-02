@@ -2,7 +2,7 @@ import vk_api
 import config
 
 session = vk_api.VkApi(token=config.TOKEN)
-vk = session.get()
+vk = session.get_api()
 
 groups = config.groups
 
@@ -11,7 +11,7 @@ def get_group_videos_links(groups):
     fl = open('used_linKs.txt', 'r+')
     fl_owner_if_video_id = fl.read().split(', ')
     groups_id = {}
-    groups_info = session.method(groups.getById({'group_ids': str(', '.join(groups))}))
+    groups_info = session.method('groups.getById', {'group_ids': str(', '.join(groups))})
 
     # get ids by goups' names
     for i in range(len(groups_info)):
@@ -19,8 +19,8 @@ def get_group_videos_links(groups):
 
         # get videoposts from groups' wall by gpoups'`ids
         groups_videos_ids = []
-        for group_id in groups[id]:
-            wall = session.method(wall.get({'owner_id': int("-" + str(group_id)),'offset': 0, 'count': 20, 'filter': 'owner','extended': 1})) # get posts from goup's wall
+        for group_id in groups_id:
+            wall = session.method('wall.get', {'owner_id': int('-' + str(group_id)),'offset': 0, 'count': 10, 'filter': 'owner','extended': 1}) # get posts from goup's wall
             
             for i in range(len(wall['items'])):
                 if len(wall['items'][i]['attachments']) != 0:

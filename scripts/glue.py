@@ -1,21 +1,27 @@
-from os import listdir, remove
+from os import listdir
 from pathlib import Path
 from moviepy.editor import VideoFileClip, concatenate_videoclips
 
-files = listdir()
-videos = []
+import download
 
-for file in files:
-    if file.endswith('.mp4'):
-        videos.append(file)
+try:
+    if download.load_videos() == 1:
+        files = listdir()
+        videos = []
 
-clips = []
+        for file in files:
+            if file.endswith('.mp4'):
+                videos.append(file)
 
-for video in videos:
-    clips.append(VideoFileClip(video))
+        clips = []
 
-final_clip = concatenate_videoclips(clips, method="compose")
-final_clip.write_videofile("final_video.mp4")
+        for video in videos:
+            clips.append(VideoFileClip(video))
 
-for video in videos:
-    remove(video)
+        final_clip = concatenate_videoclips(clips, method="compose")
+        final_clip.write_videofile("final_video.mp4")
+
+        for video in videos:
+            os.remove(video)
+except:
+    print("Новых постов нет")
