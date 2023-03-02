@@ -1,29 +1,27 @@
-import os
+from os import listdir
+from pathlib import Path
 from moviepy.editor import VideoFileClip, concatenate_videoclips
+
 import download
 
-if download.load_videos() == 1:
+try:
+    if download.load_videos() == 1:
+        files = listdir()
+        videos = []
 
-    print('\nConnecting videos into one...\n')
+        for file in files:
+            if file.endswith('.mp4'):
+                videos.append(file)
 
-    videos = []
+        clips = []
 
-    files = os.listdir()
-    
-    for file in files:
-        if file.endswith('.mp4'):
-            videos.append(file)
+        for video in videos:
+            clips.append(VideoFileClip(video))
 
-    clips = []
+        final_clip = concatenate_videoclips(clips, method="compose")
+        final_clip.write_videofile("final_video.mp4")
 
-    for video in videos:
-        clips.append(VideoFileClip(video))
-
-    final_clip = concatenate_videoclips(clips, method="compose")
-    final_clip.write_videofile("final_video.mp4")
-
-    # print('\nDeleting single videos...\n')
-    
-    # for video in videos:
-    #     os.remove(video)
-    #     print(video + ' deleted')
+        for video in videos:
+            os.remove(video)
+except:
+    print("Новых постов нет")
