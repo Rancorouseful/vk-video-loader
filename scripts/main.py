@@ -8,6 +8,8 @@ groups = config.groups
 
 def get_group_videos_links(groups):
 
+    print('\nGetting links to videos...\n')
+
     fl = open('used_linKs.txt', 'r+')
     fl_owner_if_video_id = fl.read().split(', ')
     groups_id = {}
@@ -29,17 +31,18 @@ def get_group_videos_links(groups):
                         video_id = str(wall['items'][i]['attachments'][0]['video']['id'])
                         access_key = str(wall['items'][i]['attachments'][0]['video']['access_key'])
                         if owner_id + '_' + video_id not in fl_owner_if_video_id:
-                            print(video_id)
                             fl.write(owner_id + '_' + video_id + ', ')
                             groups_videos_ids.append(owner_id + '_' + video_id + '_' + access_key)
+                            print(owner_id + '_' + video_id + '_' + access_key + ' added.')
                         else:
-                            print('Это видео там уже есть')
+                            print(owner_id + '_' + video_id + '_' + access_key + ' already in used links.')
 
         videos = session.method('video.get', {'videos': ','.join(groups_videos_ids)})
         player_links = []
-
+        print('\nLinks to the video player:\n')
         for i in range(len(videos['items'])):
             player_links.append(videos['items'][i]['player'])
+            print(videos['items'][i]['player'])
 
         fl.close()
         return(player_links)
