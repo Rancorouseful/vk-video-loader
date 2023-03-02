@@ -8,7 +8,7 @@ groups = config.groups
 
 def get_group_videos_links(groups):
 
-    fl = open('used_linKs.txt', 'r+')
+    fl = open('used_links', 'r+')
     fl_owner_if_video_id = fl.read().split(', ')
     groups_id = {}
     groups_info = session.method('groups.getById', {'group_ids': str(', '.join(groups))})
