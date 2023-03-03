@@ -20,7 +20,7 @@ def get_group_videos_links(groups):
         # get videoposts from groups' wall by gpoups'`ids
         groups_videos_ids = []
         for group_id in groups_id:
-            wall = session.method('wall.get', {'owner_id': int('-' + str(group_id)),'offset': 0, 'count': 10, 'filter': 'owner','extended': 1}) # get posts from goup's wall
+            wall = session.method('wall.get', {'owner_id': int('-' + str(group_id)),'offset': 0, 'count': 20, 'filter': 'owner','extended': 1}) # get posts from goup's wall
             
             for i in range(len(wall['items'])):
                 if len(wall['items'][i]['attachments']) != 0:

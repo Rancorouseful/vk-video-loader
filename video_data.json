@@ -1,9 +1,9 @@
 {
-"file": "../final_video.mp4",
-"part": 1,
-"title": "Видео аварии и ДТП №",
-"description": "",
-"keywords": "api, video, script",
-"category": "",
-"privacyStatus": "private"
+       "file": "final_video.mp4",
+       "part": 1,
+       "title": "A selection of road accidents №",
+       "description": "",
+       "keywords": "api, video, script",
+       "category": "22",
+       "privacyStatus": "public"
 }
