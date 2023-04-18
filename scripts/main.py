@@ -28,6 +28,7 @@ with open('video_data.json', 'r', encoding='utf-8') as file:
             print('\nDeleting single videos...\n')
             for video in glue.videos:
                 os.remove(video)
+                glue.videos.remove(video)
                 print(video + ' deleted')
         except:
             print('ERROR')

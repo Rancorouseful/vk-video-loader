@@ -1,4 +1,7 @@
 upload_video.py-oauth2.json
-used_links
+client_secrets.json
+video_data.json
+config.py
+used_links.txt
 __pycache__
 *.mp4
